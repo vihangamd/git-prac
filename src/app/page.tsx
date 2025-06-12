@@ -13,6 +13,10 @@ export default function Home() {
     }
   };
 
+  const removeTask = (index: number) => {
+    setTasks(tasks.filter((_, i) => i !== index));
+  };
+
   return (
     <div className="p-6 max-w-md mx-auto">
       <h2 className="text-lg font-bold mb-4">Add a Task</h2>
@@ -38,6 +42,13 @@ export default function Home() {
             className="flex justify-between items-center bg-gray-100 px-4 py-2 rounded"
           >
             <span>{t}</span>
+            <button
+              onClick={() => removeTask(index)}
+              className="text-red-500 hover:text-red-700"
+            >
+              ✕
+            </button>
+            ;
           </li>
         ))}
       </ul>
