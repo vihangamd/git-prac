@@ -33,7 +33,7 @@ export default function Home() {
 
   const startEditTask = (index: number) => {
     setEditIndex(index);
-    setTask(tasks[index]);
+
   };
 
   return (
