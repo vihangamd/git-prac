@@ -2,22 +2,25 @@
 
 import { useState } from "react";
 
+type Task = {
+  text: string;
+  completed: boolean;
+};
+
 export default function Home() {
   const [task, setTask] = useState("");
-  const [tasks, setTasks] = useState<string[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [editIndex, setEditIndex] = useState<number | null>(null);
 
   const addOrEditTask = () => {
     if (task.trim()) {
       if (editIndex !== null) {
-        // Edit mode
         const updatedTasks = [...tasks];
-        updatedTasks[editIndex] = task.trim();
+        updatedTasks[editIndex].text = task.trim();
         setTasks(updatedTasks);
         setEditIndex(null);
       } else {
-        // Add mode
-        setTasks([...tasks, task.trim()]);
+        setTasks([...tasks, { text: task.trim(), completed: false }]);
       }
       setTask("");
     }
@@ -33,7 +36,13 @@ export default function Home() {
 
   const startEditTask = (index: number) => {
     setEditIndex(index);
+    setTask(tasks[index].text);
+  };
 
+  const toggleComplete = (index: number) => {
+    const updatedTasks = [...tasks];
+    updatedTasks[index].completed = !updatedTasks[index].completed;
+    setTasks(updatedTasks);
   };
 
   return (
@@ -56,13 +65,23 @@ export default function Home() {
           {editIndex !== null ? "Update" : "Add"}
         </button>
       </div>
+
       <ul className="space-y-2">
         {tasks.map((t, index) => (
           <li
             key={index}
             className="flex justify-between items-center bg-gray-100 px-4 py-2 rounded"
           >
-            <span>{t}</span>
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                checked={t.completed}
+                onChange={() => toggleComplete(index)}
+              />
+              <span className={t.completed ? "line-through text-gray-500" : ""}>
+                {t.text}
+              </span>
+            </div>
             <div className="flex gap-2">
               <button
                 onClick={() => startEditTask(index)}
