@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Tooltip } from "flowbite-react";
 
 type Task = {
   text: string;
@@ -73,28 +74,40 @@ export default function Home() {
             className="flex justify-between items-center bg-gray-100 px-4 py-2 rounded"
           >
             <div className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={t.completed}
-                onChange={() => toggleComplete(index)}
-              />
+              <Tooltip
+                content={
+                  t.completed ? "Mark as Incomplete" : "Mark as Complete"
+                }
+                placement="top"
+              >
+                <input
+                  type="checkbox"
+                  checked={t.completed}
+                  onChange={() => toggleComplete(index)}
+                />
+              </Tooltip>
               <span className={t.completed ? "line-through text-gray-500" : ""}>
                 {t.text}
               </span>
             </div>
             <div className="flex gap-2">
-              <button
-                onClick={() => startEditTask(index)}
-                className="text-blue-500 hover:text-blue-700"
-              >
-                ✎
-              </button>
-              <button
-                onClick={() => removeTask(index)}
-                className="text-red-500 hover:text-red-700"
-              >
-                ✕
-              </button>
+              <Tooltip content="Edit Task" placement="top">
+                <button
+                  onClick={() => startEditTask(index)}
+                  className="text-blue-500 hover:text-blue-700"
+                >
+                  ✎
+                </button>
+              </Tooltip>
+              <Tooltip content="Delete Task" placement="top">
+                <button
+                  disabled={t.completed}
+                  onClick={() => removeTask(index)}
+                  className="text-red-500 hover:text-red-700"
+                >
+                  ✕
+                </button>
+              </Tooltip>
             </div>
           </li>
         ))}
