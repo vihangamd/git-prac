@@ -1,0 +1,10 @@
+const removeTask = (index: number) => {
+  setTasks(tasks.filter((_, i) => i !== index));
+};
+
+<button
+  onClick={() => removeTask(index)}
+  className="text-red-500 hover:text-red-700"
+>
+  ✕
+</button>;
