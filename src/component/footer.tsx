@@ -11,7 +11,7 @@
 export default function Footer() {
   return (
     <footer className="w-full bg-gray-200 text-center p-3 text-sm mt-auto">
-      © {new Date().getFullYear()} ToDo App by You
+      © {new Date().getFullYear()} ToDo App by VMD
     </footer>
   );
 }
