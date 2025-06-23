@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`ClockRangeChart matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    style="width: auto; height: auto;"
+  >
+    <canvas
+      height="150"
+      role="img"
+      width="300"
+    />
+  </div>
+</DocumentFragment>
+`;
